@@ -7,14 +7,9 @@
   "gtk-layer-shell": true,
   "passthrough": false,
   "fixed-center": true,
-  /* "modules-left": ["hyprland/workspaces", "hyprland/window"],*/
-  /* "modules-center": ["mpris", "clock", "clock#simpleclock"],*/
-  "modules-right": [
-    "hyprland/workspaces",
-    "clock",
-    "pulseaudio",
-  ],
-
+  "modules-left": ["hyprland/workspaces", "hyprland/window"],
+  "modules-center": ["clock", "clock#simpleclock"],
+  "modules-right": ["pulseaudio"],
 
   "hyprland/workspaces": {
     "on-click": "activate",
