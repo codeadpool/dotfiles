@@ -135,6 +135,20 @@ return {
 
 			local servers = {
 				clangd = {},
+				pylsp = {
+					filetypes = { "python" },
+					settings = {
+						pylsp = {
+							plugins = {
+								pycodestyle = { enabled = false }, -- optional: disable linters you don't want
+								pyflakes = { enabled = false },
+								mccabe = { enabled = false },
+								-- Enable rope for goto-definition, etc.
+								rope_autoimport = { enabled = true },
+							},
+						},
+					},
+				},
 				verible = {
 					cmd = { "verible-verilog-ls" },
 					filetypes = { "verilog", "systemverilog" },

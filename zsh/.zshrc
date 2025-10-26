@@ -1,5 +1,28 @@
-PS1='%F{blue}%B%~%b%f %F{green}❯%f '
+setopt PROMPT_SUBST
+git_prompt_info() {
+  local ref
+  if ref=$(git symbolic-ref --quiet HEAD 2>/dev/null) || \
+     ref=$(git rev-parse --short HEAD 2>/dev/null); then
+    echo "${ref#refs/heads/}"
+  fi
+}
 
+git_dirty() {
+  local gs
+  if gs=$(git status --porcelain 2>/dev/null) && [[ -n $gs ]]; then
+    echo " %F{red}⚡%f"
+  fi
+}
+
+# Show red ✗ only if last command failed
+exit_code_prompt() {
+  (( $? != 0 )) && echo "%F{red}✗ %f"
+}
+
+PROMPT='%F{magenta}┌─[%f%F{cyan}%~%f%F{magenta}]%f $(exit_code_prompt)%F{blue}$(git_prompt_info)%f$(git_dirty)
+%F{magenta}└─%f %F{green}>%f '
+
+# PS1=$'%F{magenta}┌─[%F{cyan}%~%f]─[%F{yellow}%T%f]$(git_branch)\n%F{magenta}└─%F{green}➤ %f'
 # History: Large, shared, no dups
 HISTFILE=~/.zsh_history
 HISTSIZE=100000
@@ -21,19 +44,18 @@ alias ip='ip -c=auto'
 alias l='ls'
 alias ll='ls -l'
 alias la='ls -lA'
-alias mv='mv -i'  # Prompt on overwrite
+alias mv='mv -i'
 
 # Arch pacman aliases
-alias pacup='sudo pacman -Syu'        # Update system
-alias pacin='sudo pacman -S'          # Install package
-alias pacrm='sudo pacman -Rns'        # Remove with deps
-alias pacsearch='pacman -Ss'          # Search packages
-alias pacinfo='pacman -Si'            # Package info
+alias pacup='sudo pacman -Syu'
+alias pacin='sudo pacman -S'
+alias pacrm='sudo pacman -Rns'
+alias pacsearch='pacman -Ss'
+alias pacinfo='pacman -Si'
+alias paccc='yes | sudo pacman -Scc'
 
-# Terminal title: Show shortened current dir
 precmd () { print -Pn "\e]2;%-3~\a"; }
 
-# Optional: Command not found handler for Arch (suggests packages)
 if [[ -x /usr/share/doc/pkgfile/command-not-found.zsh ]]; then
   source /usr/share/doc/pkgfile/command-not-found.zsh
 elif [[ -x /usr/lib/command-not-found ]]; then

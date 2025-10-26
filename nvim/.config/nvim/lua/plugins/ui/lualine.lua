@@ -1,13 +1,13 @@
 local colors = {
-	neon_blue    = "#00f7ff", -- Bright cyan for primary accents
-	neon_pink    = "#ff00ff", -- Vibrant magenta for highlights
-	neon_green   = "#39ff14", -- Electric green for active elements
-	neon_purple  = "#b300ff", -- Deep purple for secondary accents
-	dark_cyan    = "#1a3c4d", -- Dark teal for backgrounds
-	dark_grey    = "#0a0e14", -- Near-black for base background
-	bright_white = "#e0e0ff", -- Slightly tinted white for text
-	dim_grey     = "#2a2e38", -- Muted grey for inactive elements
-	neon_red     = "#ff073a", -- Bright red for errors or terminal mode
+	neon_blue    = "#00f7ff",
+	neon_pink    = "#ff00ff",
+	neon_green   = "#39ff14",
+	neon_purple  = "#b300ff",
+	dark_cyan    = "#1a3c4d",
+	dark_grey    = "#0a0e14",
+	bright_white = "#e0e0ff",
+	dim_grey     = "#2a2e38",
+	neon_red     = "#ff073a",
 }
 
 -- Custom cyberpunk lualine theme
@@ -55,9 +55,9 @@ local buffer_component = {
 		inactive = { bg = colors.dim_grey, fg = colors.bright_white, gui = "italic" },
 	},
 	symbols = {
-		modified = " ◉", -- Futuristic circle for modified buffers
+		modified = " ◉",
 		alternate_file = "",
-		directory = "📂", -- Modern folder emoji
+		directory = "📂",
 	},
 	mode = 2,
 }
@@ -70,7 +70,7 @@ local filename_component = {
 	shorting_target = 0,
 	symbols = {
 		modified = " ◉",
-		readonly = " 🔒", -- Lock icon for cyberpunk vibe
+		readonly = " 🔒",
 		unnamed = "[No Name]",
 	},
 }
@@ -83,12 +83,12 @@ return {
 	opts = {
 		options = {
 			theme = cyberpunk,
-			component_separators = { left = "┃", right = "┃" }, -- Thicker, futuristic separator
-			section_separators = { left = "", right = "" }, -- Angled, neon-like separators
+			component_separators = { left = "┃", right = "┃" },
+			section_separators = { left = "", right = "" },
 			disabled_filetypes = { statusline = { "snacks_dashboard" } },
 		},
 		sections = {
-			lualine_a = { { "mode", icon = "⚡️" } }, -- Cyberpunk lightning bolt
+			lualine_a = { { "mode", icon = "⚡️" } },
 			lualine_b = { "branch", "diff", "diagnostics", buffer_component },
 			lualine_c = { filename_component },
 			lualine_x = { "filesize" },
