@@ -1,0 +1,1 @@
+zsh/.vivid-one-dark.zsh

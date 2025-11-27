@@ -20,6 +20,7 @@ return {
 		end,
 		formatters_by_ft = {
 			lua = { "lua_ls" },
+			verilog = { "verible-verilog-format" },
 			systemverilog = { "verible-verilog-format" },
 		},
 	},

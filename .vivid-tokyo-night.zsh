@@ -1,0 +1,1 @@
+zsh/.vivid-tokyo-night.zsh
