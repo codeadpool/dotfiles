@@ -1,3 +1,4 @@
+export EDITOR='nvim'
 # ------------------------------------------------------------------------------
 # --- [[ 1. AESTHETICS ]] ---
 # ------------------------------------------------------------------------------
@@ -6,7 +7,7 @@
 #     eval "$(dircolors "$HOME/.config/dircolors")"
 # fi
 # [[ -f "$HOME/dotfiles/zsh/vivid-tokyo-night.zsh" ]] && source "$HOME/dotfiles/zsh/vivid-tokyo-night.zsh"
-source ~/dotfiles/zsh/.vivid-one-dark.zsh
+source ~/dotfiles/zsh/.config/zsh/.vivid-one-dark.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 if (( $+commands[exa] )); then
@@ -21,10 +22,8 @@ fi
 # --- [[ 2. CYBERPUNK PROMPT ]] ---
 # ------------------------------------------------------------------------------
 
-# Allow functions and substitutions in the prompt
 setopt PROMPT_SUBST
 
-# Git branch info function
 git_prompt_info() {
   local ref
   if ref=$(git symbolic-ref --quiet HEAD 2>/dev/null) || \
@@ -33,7 +32,6 @@ git_prompt_info() {
   fi
 }
 
-# Git dirty status function (shows ⚡ if not clean)
 git_dirty() {
   local gs
   if gs=$(git status --porcelain 2>/dev/null) && [[ -n $gs ]]; then
@@ -41,7 +39,6 @@ git_dirty() {
   fi
 }
 
-# Exit code function (shows ✗ if last command failed)
 exit_code_prompt() {
   (( $? != 0 )) && echo "%F{red}x %f"
 }
@@ -116,8 +113,18 @@ alias pacin='sudo pacman -S'
 alias pacrm='sudo pacman -Rns'
 alias pacsearch='pacman -Ss'
 alias pacinfo='pacman -Si'
-alias paccc='yes | sudo pacman -Scc'
 
+# Tmux:
+alias t='tmux'
+alias ta='tmux attach -t'
+alias tn='tmux new -s'
+alias tl='tmux ls'
+alias tk='tmux kill-session -t'
+
+# Docker:
+alias dc='docker-compose'
+alias zedit='$EDITOR ~/dotfiles/zsh/.zshrc; source ~/dotfiles/zsh/.zshrc'
+alias viedit='$EDITOR ~/dotfiles/nvim/.config/nvim/init.lua'
 # ------------------------------------------------------------------------------
 # --- [[ 6. SHELL UTILITIES ]] ---
 # ------------------------------------------------------------------------------
