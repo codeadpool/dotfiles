@@ -21,27 +21,25 @@ return {
 			"hrsh7th/cmp-nvim-lsp",
 		},
 		config = function()
-			-- === Define Diagnostic Signs ===
-			-- Custom signs should be defined separately from vim.diagnostic.config
+			-- Custom signs
 			local signs = vim.g.have_nerd_font and {
 				Error = "󰅙 ",
-				Warn = "󰀦 ",
-				Hint = "󰌶 ",
-				Info = "󰋽 ",
+				Warn  = "󰀦 ",
+				Hint  = "󰌶 ",
+				Info  = "󰋽 ",
 			} or {
 				Error = "✗ ",
-				Warn = "‼ ",
-				Hint = "ℹ ",
-				Info = "i ",
+				Warn  = "‼ ",
+				Hint  = "ℹ ",
+				Info  = "i ",
 			}
-			for type, icon in pairs(signs) do
-				local hl = "DiagnosticSign" .. type
-				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-			end
 
-			-- === Diagnostic Configuration ===
+			-- Neovim 0.12+ way: signs go inside vim.diagnostic.config
 			vim.diagnostic.config({
 				severity_sort = true,
+				underline = false,
+
+				-- FLOAT WINDOW
 				float = {
 					border = "rounded",
 					source = "if_many",
@@ -49,12 +47,22 @@ return {
 					prefix = " ",
 					max_width = 80,
 				},
-				underline = false,
-				signs = true,
+
+				-- VIRTUAL TEXT
 				virtual_text = {
 					severity = { min = vim.diagnostic.severity.ERROR },
 					spacing = 4,
 					prefix = "› ",
+				},
+
+				-- SIGNS (new correct location)
+				signs = {
+					text = {
+						[vim.diagnostic.severity.ERROR] = signs.Error,
+						[vim.diagnostic.severity.WARN]  = signs.Warn,
+						[vim.diagnostic.severity.HINT]  = signs.Hint,
+						[vim.diagnostic.severity.INFO]  = signs.Info,
+					},
 				},
 			})
 
